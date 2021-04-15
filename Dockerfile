@@ -7,5 +7,6 @@ COPY . .
 RUN CGO_ENABLED=0 go install -a -tags netgo -ldflags=-w
 
 FROM alpine:3.8
+RUN apk add --no-cache bash
 COPY --from=build /go/bin/grpc-health-probe /bin/grpc_health_probe
-ENTRYPOINT [ "/bin/grpc_health_probe" ]
+CMD [ "/bin/bash" ]
